@@ -11,7 +11,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\MyForm;
-
+use app\models\Comments;
+use yii\data\Pagination;
 
 class SiteController extends Controller
 {
@@ -126,4 +127,24 @@ class SiteController extends Controller
         ]);
         
     }
+    
+    public function actionComments() {
+        
+        $comments=Comments::find();
+        
+        $pagination = new Pagination([
+            'defaultPageSize' => 2,
+            'totalCount' => $comments->count()
+        ]);
+               
+        $comments = $comments->offset($pagination->offset)
+                ->limit($pagination->limit)
+                ->all();
+                       
+        return $this->render('comments',[
+                'comments'=> $comments,
+                'pagination' => $pagination
+        ]);
+    }
+    
 }

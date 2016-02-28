@@ -10,6 +10,3 @@ use yii\helpers\Html;
     <?=$f->field($form, 'file')->fileInput()?>
     <?=Html::submitButton('Отправить');?>
 <?php ActiveForm::end();?>
-
-
-
