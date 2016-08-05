@@ -27,30 +27,41 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => 'Каталог товаров',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => ' navbar-default navbar-fixed-top',
+        ],
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-left'],
+        'items' => [
+            [
+                'label' => 'Home',
+                'url' => ['site'],
+                'linkOptions' => [Yii::$app->homeUrl],
+            ],
+            [
+                'label' => 'Список товаров',
+                'items' => [
+                    ['label' => 'Книги', 'url' => 'index.php?r=shop/book/'],
+                    ['label' => 'Компакт диски', 'url' => 'index.php?r=shop/cd/'],
+                    ['label' => 'Прочие товары', 'url' => 'index.php?r=shop/product/'],
+                    '<li class="divider"></li>',
+                    '<li class="dropdown-header">Категория 2</li>',
+                    ['label' => 'Еще одна ссылка', 'url' => '#'],
+                ],
+            ],
         ],
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
+            [
+                'label' => 'Login',
+                'url' => ['site/login'],
+                'visible' => Yii::$app->user->isGuest
+            ],
         ],
     ]);
     NavBar::end();
