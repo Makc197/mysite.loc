@@ -14,22 +14,22 @@ use yii\helpers\Html;
 /**
  * CDController implements the CRUD actions for CD model.
  */
-class CdController extends Controller
+class CdController extends BaseController
 {
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                    'bulk-delete' => ['post'],
-                ],
+        $behaviors = parent::behaviors();
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'delete' => ['post'],
+                'bulk-delete' => ['post'],
             ],
         ];
+        return $behaviors;
     }
 
     /**

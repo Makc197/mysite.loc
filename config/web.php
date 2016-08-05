@@ -20,7 +20,21 @@ $config = [
             // message source
             // 'downloadAction' => 'gridview/export/download',
             // 'i18n' => []
-        ]
+        ],
+        'user-management' => [
+            'class' => 'webvimark\modules\UserManagement\UserManagementModule',
+
+            // 'enableRegistration' => true,
+
+            // Here you can set your handler to change layout for any controller or action
+            // Tip: you can use this event in any module
+            'on beforeAction'=>function(yii\base\ActionEvent $event) {
+                if ( $event->action->uniqueId == 'user-management/auth/login' )
+                {
+                    $event->action->controller->layout = 'loginLayout.php';
+                };
+            },
+        ],
     ],
     'components' => [
         'request' => [
@@ -28,8 +42,8 @@ $config = [
             'cookieValidationKey' => 'dsfgeyner45633tehg4y5n56m674323',
         ],
         'urlManager' => [
-          'enablePrettyUrl' => false,   
-          'showScriptName' => true,
+          'enablePrettyUrl' => false,
+          'showScriptName' => false,
          //   'rules' => [
          //       'about' => 'site/about'
          //   ]
@@ -37,10 +51,10 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
+        /*'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-        ],
+        ],*/
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -69,6 +83,14 @@ $config = [
             ],
         ],
         */
+        'user' => [
+            'class' => 'webvimark\modules\UserManagement\components\UserConfig',
+
+            // Comment this if you don't want to record user logins
+            'on afterLogin' => function($event) {
+                \webvimark\modules\UserManagement\models\UserVisitLog::newVisitor($event->identity->id);
+            }
+        ],
     ],
     'params' => $params,
 ];

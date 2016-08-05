@@ -8,9 +8,11 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use webvimark\modules\UserManagement\components\GhostMenu;
+use webvimark\modules\UserManagement\components\GhostNav;
+use webvimark\modules\UserManagement\UserManagementModule;
 
 AppAsset::register($this);
-$urlManager = Yii::$app->urlManager;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -27,6 +29,7 @@ $urlManager = Yii::$app->urlManager;
 
 <div class="wrap">
     <?php
+
     NavBar::begin([
         'brandLabel' => 'Каталог товаров',
         'brandUrl' => Yii::$app->homeUrl,
@@ -34,37 +37,76 @@ $urlManager = Yii::$app->urlManager;
             'class' => ' navbar-default navbar-fixed-top',
         ],
     ]);
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-left'],
         'items' => [
             [
                 'label' => 'Home',
-                'url' => ['site'],
-                'linkOptions' => [Yii::$app->homeUrl],
+                'url' => ['/site'],
+                //'linkOptions' => [Yii::$app->homeUrl],
             ],
+
             [
                 'label' => 'Список товаров',
+                'visible' => !Yii::$app->user->isGuest,
                 'items' => [
-                    ['label' => 'Книги', 'url' => $urlManager->createUrl('shop/book')],
-                    ['label' => 'Компакт диски', 'url' => 'shop/cd'],
-                    ['label' => 'Прочие товары', 'url' => 'shop/product'],
+                    ['label' => 'Книги', 'url' => ['/shop/book/']],
+                    ['label' => 'Компакт диски', 'url' => ['/shop/cd']],
+                    ['label' => 'Прочие товары', 'url' => ['/shop/product']],
                     '<li class="divider"></li>',
                     '<li class="dropdown-header">Категория 2</li>',
-                    ['label' => 'Еще одна ссылка', 'url' => '#'],
+                    ['label' => 'Еще одна ссылка', 'url' => ['#']],
                 ],
             ],
+
         ],
     ]);
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             [
                 'label' => 'Login',
-                'url' => ['site/login'],
+                'url' => ['/user-management/auth/login'],
                 'visible' => Yii::$app->user->isGuest
+            ],
+
+            [
+                'label' => 'Logout',
+                'url' => ['/user-management/auth/logout'],
+                'visible' => !Yii::$app->user->isGuest
             ],
         ],
     ]);
+
+    $items = UserManagementModule::menuItems();
+    $items2 = [
+        ['label' => 'Login', 'url' => ['/user-management/auth/login']],
+        ['label' => 'Logout', 'url' => ['/user-management/auth/logout']],
+        ['label' => 'Registration', 'url' => ['/user-management/auth/registration']],
+        ['label' => 'Change own password', 'url' => ['/user-management/auth/change-own-password']],
+        ['label' => 'Password recovery', 'url' => ['/user-management/auth/password-recovery']],
+        ['label' => 'E-mail confirmation', 'url' => ['/user-management/auth/confirm-email']],
+    ];
+    //foreach($items2 as $item) array_push($items, $item);
+    $items = array_merge($items,$items2);
+    
+    echo GhostNav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'encodeLabels' => false,
+        'activateParents' => true,
+
+        'items' => [
+            [
+                'label' => 'Frontend routes',
+                'items' => $items,
+            ],
+        ],
+
+    ]);
+
+
     NavBar::end();
     ?>
 

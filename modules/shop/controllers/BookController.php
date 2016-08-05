@@ -14,22 +14,22 @@ use yii\helpers\Html;
 /**
  * BookController implements the CRUD actions for Book model.
  */
-class BookController extends Controller
+class BookController extends BaseController
 {
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                    'bulk-delete' => ['post'],
-                ],
+        $behaviors = parent::behaviors();
+        $behaviors['verbs'] = [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'delete' => ['post'],
+                'bulk-delete' => ['post'],
             ],
         ];
+        return $behaviors;
     }
 
     /**
