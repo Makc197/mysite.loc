@@ -10,6 +10,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+$urlManager = Yii::$app->urlManager;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -44,9 +45,9 @@ AppAsset::register($this);
             [
                 'label' => 'Список товаров',
                 'items' => [
-                    ['label' => 'Книги', 'url' => 'index.php?r=shop/book/'],
-                    ['label' => 'Компакт диски', 'url' => 'index.php?r=shop/cd/'],
-                    ['label' => 'Прочие товары', 'url' => 'index.php?r=shop/product/'],
+                    ['label' => 'Книги', 'url' => $urlManager->createUrl('shop/book')],
+                    ['label' => 'Компакт диски', 'url' => 'shop/cd'],
+                    ['label' => 'Прочие товары', 'url' => 'shop/product'],
                     '<li class="divider"></li>',
                     '<li class="dropdown-header">Категория 2</li>',
                     ['label' => 'Еще одна ссылка', 'url' => '#'],
