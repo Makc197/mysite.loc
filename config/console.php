@@ -11,6 +11,13 @@ $config = [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
     'components' => [
+        'search' => [
+            'class' => 'himiklab\yii2\search\Search',
+            'models' => [
+                'app\modules\shop\models\Book',
+                'app\modules\shop\models\Cd',
+            ],
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -21,6 +28,14 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'baseUrl'=>'http://mysite.loc',
+        //   'rules' => [
+        //       'about' => 'site/about'
+        //   ]
         ],
         'db' => $db,
     ],

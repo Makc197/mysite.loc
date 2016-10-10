@@ -19,7 +19,10 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "johnitvn/yii2-ajaxcrud": "*",
-        "webvimark/module-user-management": "^1.0"
+        "webvimark/module-user-management": "^1.0",
+		"zendframework/zendsearch": "2.0.0rc5",
+		"zendframework/zend-stdlib": "2.3.1 as 2.0.0rc5",
+		"himiklab/yii2-search-component-v2": "*"	
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

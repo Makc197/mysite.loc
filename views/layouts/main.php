@@ -62,7 +62,7 @@ AppAsset::register($this);
 
         ],
     ]);
-
+    
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
@@ -82,8 +82,8 @@ AppAsset::register($this);
 
     $items = UserManagementModule::menuItems();
     $items2 = [
-        ['label' => 'Login', 'url' => ['/user-management/auth/login']],
-        ['label' => 'Logout', 'url' => ['/user-management/auth/logout']],
+//        ['label' => 'Login', 'url' => ['/user-management/auth/login']],
+//        ['label' => 'Logout', 'url' => ['/user-management/auth/logout']],
         ['label' => 'Registration', 'url' => ['/user-management/auth/registration']],
         ['label' => 'Change own password', 'url' => ['/user-management/auth/change-own-password']],
         ['label' => 'Password recovery', 'url' => ['/user-management/auth/password-recovery']],
