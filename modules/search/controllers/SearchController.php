@@ -1,12 +1,14 @@
 <?php
-namespace app\controllers;
+namespace app\modules\search\controllers;
 
+use Yii;
 use yii\web\Controller;
 use yii\data\ArrayDataProvider;
-use Yii;
 
-class SearchController extends Controller {
-    
+class SearchController extends Controller
+{
+    const PAGE_SIZE = 10;
+
     public function actionIndex($q = '')
     {
         /** @var \himiklab\yii2\search\Search $search */
@@ -16,10 +18,11 @@ class SearchController extends Controller {
 
         $dataProvider = new ArrayDataProvider([
             'allModels' => $searchData['results'],
-            'pagination' => ['pageSize' => 50 ],
+            'pagination' => ['pageSize' => self::PAGE_SIZE],
         ]);
+
         return $this->render(
-            'found',
+            'index',
             [
                 'hits' => $dataProvider->getModels(),
                 'pagination' => $dataProvider->getPagination(),
@@ -29,10 +32,10 @@ class SearchController extends Controller {
     }
 
     // Of course, this function should be in the console part of the application!
-    /*public function actionIndexing()
+    public function actionIndexing()
     {
-        // @var \himiklab\yii2\search\Search $search
+        /** @var \himiklab\yii2\search\Search $search */
         $search = Yii::$app->search;
         $search->index();
-    }*/
+    }
 }

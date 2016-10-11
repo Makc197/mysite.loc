@@ -13,9 +13,9 @@ $config = [
                 '@shop' => '@app/modules/shop',
             ],
         ],
-        /*'search' => [
+        'search' => [
             'class' => 'app\modules\search\Search',
-        ],*/
+        ],
         'gridview' => [
             'class' => '\kartik\grid\Module'
         // enter optional module parameters below - only if you need to  

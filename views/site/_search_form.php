@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
 
-<?= Html::beginForm(Url::to(['/search']), 'get', ['class' => 'form-inlin']) ?>
+<?= Html::beginForm(Url::to(['/search/search/']), 'get', ['class' => 'form-inlin']) ?>
         <div class="input-group">
           <?= Html::textInput('q', $text, ['class' => 'form-control', 'placeholder' => 'Поиск...']) ?>
           <span class="input-group-btn">

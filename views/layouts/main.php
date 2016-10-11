@@ -11,6 +11,7 @@ use app\assets\AppAsset;
 use webvimark\modules\UserManagement\components\GhostMenu;
 use webvimark\modules\UserManagement\components\GhostNav;
 use webvimark\modules\UserManagement\UserManagementModule;
+use app\components\widgets\SearchWidget;
 
 AppAsset::register($this);
 ?>
@@ -104,13 +105,14 @@ AppAsset::register($this);
             ],
         ],
 
-    ]);
+    ]); ?>
+    
+    <?= SearchWidget::widget(['text'=>'']); ?>    
+    
+   <?php NavBar::end(); ?>
+   
 
-
-    NavBar::end();
-    ?>
-
-    <div class="container">
+    <div class="container">        
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
