@@ -107,6 +107,7 @@ AppAsset::register($this);
 
     ]); ?>
     
+    
     <?= SearchWidget::widget(['text'=>'']); ?>    
     
    <?php NavBar::end(); ?>
